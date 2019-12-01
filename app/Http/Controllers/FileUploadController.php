@@ -8,6 +8,7 @@ use Illuminate\Http\File;
 use Illuminate\Routing\Redirector;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use resources\libs\SimpleXLSX;
 
 class FileUploadController extends Controller
 {
@@ -27,6 +28,10 @@ class FileUploadController extends Controller
         if ($validator->fails()) {
             return view('test.file', ['errors' => $validator->errors()] );
         }
+
+        $xslx = new SimpleXLSX($request->file('file')->get());
+        $model = new FileUpload();
+        $model->multiInsert($xslx);
     }
 
     protected function customValidator(Request $request)
