@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Fileuploaded extends Migration
+class CreateFileUploadsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class Fileuploaded extends Migration
      */
     public function up()
     {
-        Schema::create('file_uploaded', function (Blueprint $table) {
+        Schema::create('file_uploads', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->text('department');
             $table->text('type');
@@ -36,6 +36,6 @@ class Fileuploaded extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('file_uploaded');
+        Schema::dropIfExists('file_uploads');
     }
 }
