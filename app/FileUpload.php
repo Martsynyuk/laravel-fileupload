@@ -26,10 +26,15 @@ class FileUpload extends Model
     public function multiInsert(SimpleXLSX $object)
     {
         $data = [];
+        $unique = [];
         $count = 1;
 
         foreach( $object->rows() as $array) {
             $arr = [];
+            if (in_array(($hash = md5(implode(',', $array))), $unique)) {
+                continue;
+            }
+            $unique[] = $hash;
 
             foreach ($array as $key => $item) {
                 if (array_key_exists($key, $this->fields)) {
